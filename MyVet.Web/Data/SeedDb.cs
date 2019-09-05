@@ -23,8 +23,8 @@ namespace MyVet.Web.Data
         {
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRoles();
-            var manager = await CheckUserAsync("1010", "Santiago", "Yosa", "santiyosa@gmail.com", "318 377 95 65", "Calle Luna Calle Sol", "Admin");
-            var customer = await CheckUserAsync("2020", "Gloria", "Guevara", "ardyosa@hotmail.com", "318 377 95 65", "Calle Luna Calle Sol", "Customer");
+            var manager = await CheckUserAsync("1010", "Juan", "Zuluaga", "jzuluaga55@gmail.com", "350 634 2747", "Calle Luna Calle Sol", "Admin");
+            var customer = await CheckUserAsync("2020", "Juan", "Zuluaga", "jzuluaga55@hotmail.com", "350 634 2747", "Calle Luna Calle Sol", "Customer");
             await CheckPetTypesAsync();
             await CheckServiceTypesAsync();
             await CheckOwnerAsync(customer);
@@ -39,13 +39,7 @@ namespace MyVet.Web.Data
             await _userHelper.CheckRoleAsync("Customer");
         }
 
-        private async Task<User> CheckUserAsync(string document, 
-            string firstName, 
-            string lastName, 
-            string email, 
-            string phone, 
-            string address, 
-            string role)
+        private async Task<User> CheckUserAsync(string document, string firstName, string lastName, string email, string phone, string address, string role)
         {
             var user = await _userHelper.GetUserByEmailAsync(email);
             if (user == null)
@@ -74,8 +68,8 @@ namespace MyVet.Web.Data
             {
                 var owner = _dataContext.Owners.FirstOrDefault();
                 var petType = _dataContext.PetTypes.FirstOrDefault();
-                AddPet("Channel", owner, petType, "Shih tzu");
-                AddPet("Luna", owner, petType, "Fresfuder");
+                AddPet("Otto", owner, petType, "Shih tzu");
+                AddPet("Killer", owner, petType, "Dobermann");
                 await _dataContext.SaveChangesAsync();
             }
         }
@@ -95,9 +89,8 @@ namespace MyVet.Web.Data
         {
             if (!_dataContext.PetTypes.Any())
             {
-                _dataContext.PetTypes.Add(new PetType { Name = "Dog" });
-                _dataContext.PetTypes.Add(new PetType { Name = "Cat" });
-                _dataContext.PetTypes.Add(new PetType { Name = "Bunny" });
+                _dataContext.PetTypes.Add(new PetType { Name = "Perro" });
+                _dataContext.PetTypes.Add(new PetType { Name = "Gato" });
                 await _dataContext.SaveChangesAsync();
             }
         }
